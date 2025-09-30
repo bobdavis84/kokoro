@@ -22,8 +22,9 @@ dependencies = [
     "loguru",
     "misaki[en]>=0.9.4",
     "numpy",
+    "soundfile>=0.13.1",
     "torch",
-    "transformers"
+    "transformers",
 ]
 
 [project.scripts]
