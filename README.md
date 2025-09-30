@@ -4,6 +4,9 @@ An inference library for [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M)
 
 > **Kokoro** is an open-weight TTS model with 82 million parameters. Despite its lightweight architecture, it delivers comparable quality to larger models while being significantly faster and more cost-efficient. With Apache-licensed weights, Kokoro can be deployed anywhere from production environments to personal projects.
 
+## 🌐 Run Frontend on a built-in Flast server.
+For a quick guide on setting up and running the web interface, see the **[Frontend Quick Start Guide](./frontend/README.md#🚀-quick-start)**.
+
 ### Usage
 You can run this basic cell on [Google Colab](https://colab.research.google.com/). [Listen to samples](https://huggingface.co/hexgrad/Kokoro-82M/blob/main/SAMPLES.md).
 ```py
@@ -85,6 +88,10 @@ for i, (gs, ps, audio) in enumerate(generator):
     display(Audio(data=audio, rate=24000, autoplay=i==0))
     sf.write(f'{i}.wav', audio, 24000) # save each audio file
 ```
+
+### 🌐 Frontend Applications
+
+This repository includes user-friendly web and desktop frontends for running Kokoro TTS. For a quick guide on setting up and running the web interface, see the **[Frontend Quick Start Guide](./frontend/README.md#🚀-quick-start)**.
 
 ### Windows Installation
 To install espeak-ng on Windows:
