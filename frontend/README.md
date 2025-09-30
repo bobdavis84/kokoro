@@ -2,72 +2,187 @@
 
 This package provides two user-friendly frontend applications for the Kokoro Text-to-Speech system:
 
-1. **Web Frontend** - Browser-based interface with modern UI
-2. **Desktop GUI** - Native desktop application with tkinter
-
-## 📋 Features
-
-Both applications include all the features you requested:
-
-- ✅ **Voice Selection** - Choose from multiple available voices
-- ✅ **Playback Speed Control** - Adjust speech speed from 0.5x to 2.0x
-- ✅ **Text Input Box** - Enter text up to 5000 characters
-- ✅ **Generate Speech Button** - One-click speech generation
-- ✅ **Audio Playback** - Built-in audio player
-- ✅ **File Download/Save** - Save generated audio files
-- ✅ **Language Support** - Multiple language options
-- ✅ **Real-time Status** - Shows system status and progress
+1.  **Web Frontend** - Browser-based interface with modern UI
+2.  **Desktop GUI** - Native desktop application with tkinter
 
 ## 🚀 Quick Start
 
-### Prerequisites
+For users who already have the prerequisites (like `pyenv`, Python 3.12+, and `espeak-ng`) installed, follow these steps to get the web application running quickly:
 
-Make sure you have Kokoro TTS installed:
+## 1. Prerequisites (One-Time Setup)
 
+You only need to perform these steps once on your machine. This guide uses `pyenv` to manage Python versions, which is highly recommended to avoid conflicts with your system's default Python.
+
+### Step 1: Install pyenv
+
+
+Install `pyenv` using a package manager. If you are on macOS, Homebrew is the recommended method:
+
+#### MACOS
 ```bash
-# Install Kokoro TTS and dependencies
-pip install kokoro soundfile flask pygame
+brew install pyenv
+```
+#### cachyOS - No Dependencies
+```bash
+sudo pacman -S pyenv
+```
+#### cachyOS - with Dependencies
+```bash
+sudo pacman -S pyenv base-devel openssl zlib xz sqlite bzip2 readline tk ncurses libffi
+```
+### Install Python 3.12.4 in PYENV environment
+```bash
+pyenv install 3.12.4
+```
+### Add to pyenv to your shell with init
 
-# On CachyOS/Arch Linux, also install tkinter for GUI:
-sudo pacman -S tk
+For Bash:
+```bash
+echo 'eval "$(pyenv init -)"' >> ~/.bash_profile
+source ~/.bash_profile
 ```
 
-### Option 1: Web Frontend (Recommended)
-
-The web frontend provides a modern, responsive interface accessible from any browser.
-
+For Zsh:
 ```bash
-# Start the web server
-cd kokoro-frontend
-./start_web.sh
-
-# Or manually:
-python3 app.py
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+source ~/.zshrc
 ```
 
-Then open your browser to: **http://localhost:53286**
-
-### Option 2: Desktop GUI
-
-The desktop GUI provides a native application experience.
-
+For Fish:
 ```bash
-# Start the desktop application
-cd kokoro-frontend
-./start_gui.sh
-
-# Or manually:
-python3 gui_app.py
+echo 'pyenv init - | source' >> ~/.config/fish/config.fish
+Restart terminal
 ```
 
+```bash
+# 1. Clone the repository and navigate to the frontend directory
+git clone https://github.com/bobdavis84/kokoro.git
+cd kokoro/frontend
+
+# 2. Set up the Python environment
+pyenv local 3.12.4
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. Make script executable and run the web application
+source .venv/bin/activate
+sh ./start_web.sh
+```
+
+Once started, access the application in your browser at the local URL provided in the terminal (e.g., `http://127.0.0.1:53286`).
+
+## 📋 Features
+
+Both applications include a rich set of features:
+
+-   ✅ **Voice Selection** - Choose from multiple available voices
+-   ✅ **Playback Speed Control** - Adjust speech speed from 0.5x to 2.0x
+-   ✅ **Text Input Box** - Enter text up to 5000 characters
+-   ✅ **Generate Speech Button** - One-click speech generation
+-   ✅ **Audio Playback** - Built-in audio player
+-   ✅ **File Download/Save** - Save generated audio files
+-   ✅ **Language Support** - Multiple language options
+-   ✅ **Real-time Status** - Shows system status and progress
+
+## 🔧 Detailed Installation and Setup
+
+Follow these steps to get the frontend applications running on your local machine.
+
+### 1. Prerequisites
+
+Make sure you have the following installed on your system:
+
+-   **Git**: To clone the repository.
+-   **Python 3.12+**: We recommend using `pyenv` to manage Python versions.
+-   **System Dependencies**: `espeak-ng` for text processing and `tk` (optional, for the Desktop GUI).
+
+    **Dependency Installation Commands:**
+    -   **Arch / CachyOS:** `sudo pacman -S espeak-ng tk`
+    -   **Debian / Ubuntu:** `sudo apt-get install espeak-ng tk`
+
+### 2. Set Up Python Environment (Recommended: `pyenv`)
+
+Using `pyenv` helps manage multiple Python versions without conflicts.
+
+1.  **Install `pyenv`**: Follow the official [pyenv installation guide](https://github.com/pyenv/pyenv#installation).
+
+2.  **Configure your shell** to load `pyenv`. Add the correct command for your shell's startup file (`~/.bashrc`, `~/.zshrc`, or `~/.config/fish/config.fish`).
+
+    -   For **bash**:
+        ```bash
+        echo 'eval "$(pyenv init -)"' >> ~/.bashrc
+        ```
+    -   For **zsh**:
+        ```bash
+        echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+        ```
+    -   For **fish**:
+        ```fish
+        echo 'pyenv init - | source' >> ~/.config/fish/config.fish
+        ```
+
+3.  **Restart your shell** or run `source <your_shell_config_file>` for the changes to take effect.
+
+4.  **Install Python 3.12.4** (or a newer 3.12+ version):
+    ```bash
+    pyenv install 3.12.4
+    ```
+
+### 3. Install Application Dependencies
+
+1.  **Clone the repository**:
+    ```bash
+    git clone https://github.com/bobdavis84/kokoro
+    ```
+
+2.  **Navigate to the frontend directory**:
+    ```bash
+    cd kokoro/frontend
+    ```
+
+3.  **Set the local Python version** (if you used `pyenv`):
+    ```bash
+    pyenv local 3.12.4
+    ```
+
+4.  **Create and activate a virtual environment**:
+    ```bash
+    python3 -m venv .venv
+    source .venv/bin/activate
+    ```
+    *Note: To deactivate the virtual environment later, simply run `deactivate`.*
+
+5.  **Install the required Python packages**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+### 4. Running the Application
+
+1.  **Make the startup scripts executable**:
+    ```bash
+    source .venv/bin/activate
+    ```
+
+2.  **Start the Web Frontend**:
+    ```bash
+    sh ./start_web.sh
+    ```
+    *Note: The first time you run this, it may take a few minutes to download the necessary TTS models.*
+
+3.  **Access the application** in your web browser. The terminal will show you which URLs to use:
+    -   Access from the same machine via: `http://127.0.0.1:53286`
+    -   Access from other devices on your local network via: `http://<YOUR_LOCAL_IP_ADDRESS>:53286` (e.g., `http://192.168.1.100:53286`). Your local IP address will vary.
+
+4.  **(Alternative) Start the Desktop GUI**:
+    ```bash
+    ./start_gui.sh
+    ```
+    
 ## 🌐 Web Frontend Details
-
-### Features
-- **Modern UI** - Clean, responsive design that works on desktop and mobile
-- **Real-time Generation** - Live progress updates during speech generation
-- **Audio Streaming** - Play audio directly in the browser
-- **File Downloads** - Download generated audio files
-- **API Endpoints** - RESTful API for integration with other applications
 
 ### API Endpoints
 
@@ -91,183 +206,26 @@ curl http://localhost:53286/status
 curl http://localhost:53286/health
 ```
 
-### Configuration
-
-You can modify `app.py` to change:
-- Port number (default: 53286)
-- Maximum text length (default: 5000 characters)
-- Upload/output directories
-- Available voices and languages
-
-## 🖥️ Desktop GUI Details
-
-### Features
-- **Native Interface** - Uses tkinter for native OS integration
-- **Audio Playback** - Built-in audio player with play/pause/stop controls
-- **File Operations** - Load text files and save audio files
-- **Progress Tracking** - Real-time progress bar during generation
-- **Character Counter** - Live character count with warnings
-
-### Controls
-- **Text Area** - Scrollable text input with character counter
-- **Voice Dropdown** - Select from available voices
-- **Language Dropdown** - Choose target language
-- **Speed Slider** - Adjust playback speed (0.5x - 2.0x)
-- **Generate Button** - Start speech generation
-- **Audio Controls** - Play, pause, stop, and save generated audio
-- **File Menu** - Load text files and clear input
-
-## 🎯 Available Voices and Languages
-
-### Voices
-- `af_heart` - AF Heart (Default)
-- `af_bella` - AF Bella
-- `af_nicole` - AF Nicole
-- `af_sarah` - AF Sarah
-- `am_adam` - AM Adam
-- `am_michael` - AM Michael
-- `bf_emma` - BF Emma
-- `bf_isabella` - BF Isabella
-
-### Languages
-- `a` - American English
-- `b` - British English
-- `e` - Spanish (es)
-- `f` - French (fr-fr)
-- `h` - Hindi (hi)
-- `i` - Italian (it)
-- `j` - Japanese (ja)
-- `p` - Brazilian Portuguese (pt-br)
-- `z` - Mandarin Chinese (zh)
-
-## 📁 File Structure
-
-```
-kokoro-frontend/
-├── app.py              # Flask web application
-├── gui_app.py          # Tkinter desktop application
-├── templates/
-│   └── index.html      # Web frontend HTML template
-├── requirements.txt    # Python dependencies
-├── start_web.sh       # Web frontend startup script
-├── start_gui.sh       # Desktop GUI startup script
-└── README.md          # This documentation
-```
-
-## 🔧 Installation on CachyOS
-
-For your CachyOS laptop, here's the complete installation process:
-
-```bash
-# 1. Install system dependencies
-sudo pacman -S python python-pip espeak-ng tk
-
-# 2. Install Python packages
-pip install kokoro soundfile flask pygame
-
-# 3. Clone/download the frontend applications
-# (The files are already in /workspace/kokoro-frontend)
-
-# 4. Make scripts executable
-chmod +x start_web.sh start_gui.sh
-
-# 5. Run either application
-./start_web.sh    # For web interface
-# OR
-./start_gui.sh    # For desktop GUI
-```
-
 ## 🎨 Customization
 
 ### Web Frontend Styling
-Edit `templates/index.html` to customize:
-- Colors and themes
-- Layout and responsive design
-- Additional features
+Edit `templates/index.html` to customize colors, layout, and add features.
 
 ### Desktop GUI Appearance
-Modify `gui_app.py` to change:
-- Window size and layout
-- Fonts and colors
-- Additional controls
+Modify `gui_app.py` to change the window size, layout, fonts, and colors.
 
 ### Adding New Voices
-To add new voices, update the `voices` dictionary in both applications:
-
-```python
-self.voices = {
-    'af_heart': 'AF Heart (Default)',
-    'your_voice': 'Your Custom Voice',
-    # ... other voices
-}
-```
+To add new voices, update the `voices` dictionary in both `app.py` (web) and `gui_app.py` (desktop).
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+1.  **"Kokoro TTS is not available" / "No module named 'kokoro'"**
+    - Ensure your virtual environment is active (`source .venv/bin/activate`).
+    - Re-run `pip install -r requirements.txt`.
 
-1. **"Kokoro TTS is not available"**
-   ```bash
-   pip install kokoro soundfile
-   ```
+2.  **"No module named 'tkinter'" (Desktop GUI)**
+    - Install the `tk` package using your system's package manager (see prerequisites).
 
-2. **"No module named 'flask'"**
-   ```bash
-   pip install flask
-   ```
-
-3. **"No module named 'pygame'"**
-   ```bash
-   pip install pygame
-   ```
-
-4. **"No module named 'tkinter'" (Desktop GUI)**
-   ```bash
-   # CachyOS/Arch Linux
-   sudo pacman -S tk
-   
-   # Ubuntu/Debian
-   sudo apt-get install python3-tk
-   ```
-
-5. **Audio playback issues**
-   - Make sure your system has audio drivers installed
-   - Check volume settings
-   - Try different audio formats
-
-6. **Port already in use (Web Frontend)**
-   - Change the port in `app.py`: `app.run(host='0.0.0.0', port=YOUR_PORT)`
-   - Or kill existing processes: `pkill -f "python.*app.py"`
-
-### Performance Tips
-
-1. **First Run** - The first generation will be slower as models are downloaded
-2. **GPU Acceleration** - CUDA will be used automatically if available
-3. **Memory Usage** - Each language pipeline uses ~1GB RAM when loaded
-4. **Concurrent Users** - The web frontend can handle multiple users simultaneously
-
-## 🔒 Security Notes
-
-- The web frontend runs in development mode by default
-- For production use, configure a proper WSGI server (gunicorn, uwsgi)
-- File uploads are limited to 16MB
-- Text input is limited to 5000 characters
-
-## 📞 Support
-
-If you encounter any issues:
-
-1. Check that Kokoro TTS is properly installed
-2. Verify all dependencies are installed
-3. Check the console output for error messages
-4. Ensure audio system is working
-5. Try both web and desktop versions to isolate issues
-
-## 🎉 Success!
-
-You now have two fully functional frontend applications for Kokoro TTS! 
-
-- **Web Frontend**: Modern, accessible, multi-user capable
-- **Desktop GUI**: Native, offline, single-user focused
-
-Both applications provide all the features you requested and are ready to use on your CachyOS laptop.
+3.  **Port already in use (Web Frontend)**
+    - Change the port in `app.py`: `app.run(host='0.0.0.0', port=YOUR_PORT)`
+    - Or stop the existing process using that port.
